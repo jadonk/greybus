@@ -12,8 +12,8 @@
 #include <linux/pm_runtime.h>
 #include <linux/slab.h>
 #include <net/genetlink.h>
+#include <linux/greybus.h>
 
-#include "greybus.h"
 #include "gb_netlink.h"
 
 static dev_t major_dev;
