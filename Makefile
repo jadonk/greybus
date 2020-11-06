@@ -36,9 +36,9 @@ ccflags-y := -Wall
 ccflags-y += -I$(src)
 ccflags-y += -I$(KERNELDIR)/drivers/staging/greybus
 
-all: module
+all: modules
 
-module:
+modules:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD)
 
 check:
@@ -48,12 +48,11 @@ clean:
 	rm -f *.o *~ core .depend .*.cmd *.ko *.mod.c
 	rm -f Module.markers Module.symvers modules.order
 	rm -rf .tmp_versions Modules.symvers
-	$(MAKE) -C tools clean
 
 coccicheck:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) coccicheck
 
-install: module
+install:
 	mkdir -p $(INSTALL_MOD_PATH)/lib/modules/$(KERNELVER)/kernel/drivers/greybus/
 	cp -f *.ko $(INSTALL_MOD_PATH)/lib/modules/$(KERNELVER)/kernel/drivers/greybus/
 	depmod -b $(INSTALL_MOD_PATH) -a $(KERNELVER)
